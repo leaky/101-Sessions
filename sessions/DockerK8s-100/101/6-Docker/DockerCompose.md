@@ -12,7 +12,7 @@ To bring up a stack you can use the following
 
 or as with ```docker``` in detached mode
 
-```ocker-compose up -d```
+```docker-compose up -d```
 
 ## View docker compose containers
 ```docker-compose ps```
