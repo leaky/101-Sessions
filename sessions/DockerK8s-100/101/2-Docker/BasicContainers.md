@@ -21,9 +21,9 @@ The run command takes a string as a parameter, the above example used ```ubuntu`
 
 ```https://hub.docker.com```
 
-You can change the location of where docker looks for a image. This often is a internal vetted repository of images that are approved for you use within an organisation.
+You can change the location of where docker looks for an image. This is often an internal vetted repository of images that are approved for your use within an organisation.
 
-Example this command will get the latest version of ```Mongo```
+Example: the following command will fetch the latest version of ```Mongo```
 
 ```docker run mongo```
 
@@ -31,7 +31,7 @@ use ```control-c``` to exit
 
 ### Detached Mode
 
-In the real world you dont want to keep an open terminal session open to the active container. By using the ```-d``` you can detach the container to run in the background
+In the real world you don't want to keep a terminal session open for the active container. By using the ```-d``` option, you can detach the container to run in the background and so it's output is not displayed:
 
 ```docker run -d mongo```
 
@@ -44,13 +44,14 @@ You should see the container running.
 ### Stop/Remove containers and Remove images
 
 At this stage you will have to tidy up your docker environment.
-Firstly stop all running containers.
+
+Firstly, stop all running containers.
 
 #### Containers
 
 ```docker stop my_container```
 
-or to stop all 
+or to stop all running containers
 
 ```docker stop $(docker ps -q)```
 
@@ -58,7 +59,7 @@ or if you really need to kill all
 
 ```docker kill $(docker ps -q)```
 
-Then you can remove them all
+then you can remove them all
 
 ```docker rm $(docker ps -a -q)```
 
@@ -67,7 +68,7 @@ Then you can remove them all
 
 ```docker rmi my_image```
 
-or all
+or, to delete all local docker images run:
 
 ```docker rmi $(docker images -q)```
 
@@ -83,9 +84,12 @@ You can also give a name to the container using the ```--name```
 
 ### Port Mapping, Host to Container 
 
-So  we are combining a number of commands we have looked at before. We need to use one more the ```-p``` switch. This will map a port from the host to the container.
-So ```-p 8000:80``` will map the ports we need and you can use you local browser to view the container hosted web sever. Windows hosts might need to us the ip address of the container by using the ```docker exec aspnetcore_sample ipconfig``` command in a separate terminal session.
+It's time to combine a number of commands that we have looked at in the session so far, with the introduction of a new option. Here we'll use the ```-p``` option to map a port from the host to the container.
+
+Adding ```-p 8000:80``` to our docker command will map the ports we need for the session and allow us to use a local web browser to view the containerised hosted web sever. 
 
 ```docker run -it --rm -p 8000:80 --name aspnetcore_sample mcr.microsoft.com/dotnet/core/samples:aspnetapp```
 
-it runs a interactive terminal which will remove itself when it exits. It will be named "aspnetcore_sample" and be sourced with key "mcr.microsoft.com/dotnet/core/samples" and filtered using the tag aspnetapp. 
+Note: Windows hosts might need to use the ip address of the container by using the ```docker exec aspnetcore_sample ipconfig``` command in a separate terminal session.
+
+The above command runs an interactive terminal session which will remove itself when it exits. The container will be named "aspnetcore_sample", sourced with key "mcr.microsoft.com/dotnet/core/samples" and be filtered using the tag ```aspnetapp```. 
